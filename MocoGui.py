@@ -1,3 +1,4 @@
+#Written By: Naadir Bakari
 #This imports the library tkinter what is used to make the GUI
 import tkinter
 #This creates the main window
