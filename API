@@ -1,21 +1,24 @@
 from googleapiclient.discovery import build
+import config
 
 urlcopy = "https://www.youtube.com/watch?v="
-yt = build('youtube', 'v3', developerKey=key)
+yt = build('youtube', 'v3', developerKey=config.key)
 videoid = []
 
 
 class Search:
-    def __init__(self, tx, nm):
+    def __init__(self, tx, nm, ln):
         self.__topic = tx
         self.__num = nm
+        self.__leng = ln
 
     pass
 
 
 idea = input("Enter School Topic")
 l = input("Enter Number of Videos")
-n = Search(idea, l)
+o = input("Enter Length")
+n = Search(idea, l, o)
 numR = int(l)
 
 k = yt.search().list(
@@ -23,8 +26,9 @@ k = yt.search().list(
     q=idea,
     topicId="/m/01k8wb",
     type = 'video',
-    videoDuration = "short",
+    videoDuration = o,
     order='relevance',
+    relevantLanguage = "en",
     maxResults=numR
 ).execute()
 
