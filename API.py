@@ -1,37 +1,37 @@
 from googleapiclient.discovery import build
 import config
 
+key = 'AIzaSyBG5vLsKCtF94glQUIeLnIXjGdrjHKtOWY'
 urlcopy = "https://www.youtube.com/watch?v="
-yt = build('youtube', 'v3', developerKey=config.key)
+yt = build('youtube', 'v3', developerKey=key)
 videoid = []
 
-
+topic = ""
+num = 0
+leng = ""
 class Search:
     def __init__(self, tx, nm, ln):
-        self.__topic = tx
-        self.__num = nm
-        self.__leng = ln
-
+        self.topic = tx
+        self.num = nm
+        self.leng = ln
+        super().__init__(tx, nm, ln)
     pass
 
 
-idea = input("Enter School Topic")
-l = input("Enter Number of Videos")
-o = input("Enter Length")
-n = Search(idea, l, o)
-numR = int(l)
+
+n = Search(topic, num, leng)
+numR = int(num)
 
 k = yt.search().list(
     part='snippet',
-    q=idea,
+    q=topic,
     topicId="/m/01k8wb",
     type = 'video',
-    videoDuration = o,
+    videoDuration = leng,
     order='relevance',
-    relevantLanguage = "en",
+    relevanceLanguage="en",
     maxResults=numR
 ).execute()
-
 print(k)
 
 for result in k.get("items", []):
